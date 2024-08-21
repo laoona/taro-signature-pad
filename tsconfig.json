@@ -1,31 +1,24 @@
 {
   "compilerOptions": {
-    "module": "es2015",
-    "target": "es2015",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "noImplicitAny": false,
-    "experimentalDecorators": true,
+    "target": "es2017",
+    "module": "commonjs",
+    "removeComments": false,
     "preserveConstEnums": true,
-    "sourceMap": true,
-    "watch": false,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
-    "lib": [
-      "es2015.promise",
-      "es2015",
-      "es2016",
-      "dom"
-    ]
+    "outDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types"]
   },
-  "filesGlob": [
-    "components/**/*.ts",
-    "themes/**/*.tsx"
-  ],
-  "exclude": [
-    "build",
-    "node_modules"
-  ]
+  "compileOnSave": false
 }

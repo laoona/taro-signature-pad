@@ -1,6 +1,6 @@
-import React, {FC, useCallback, useEffect, useImperativeHandle, useRef} from "react";
+import React, { useCallback, useEffect, useImperativeHandle, useRef } from "react";
 import Taro from '@tarojs/taro';
-import {Canvas, View} from "@tarojs/components";
+import { Canvas } from "@tarojs/components";
 import SignaturePadOrign from './utils/signature_pad.js'
 import './signaturePad.scss';
 
@@ -9,24 +9,24 @@ interface IProps {
     style?: string;
 }
 
-const SignaturePad = React.forwardRef<any, IProps>(({className, style}, ref)=>{
+const SignaturePad = React.forwardRef<any, IProps>(({ className, style }, ref) => {
     const canvasRef = useRef<any>();
     const signaturePadRef = useRef<any>(new SignaturePadOrign());
 
-    const handleTouchStart = useCallback((e)=>{
+    const handleTouchStart = useCallback((e) => {
         signaturePadRef.current && signaturePadRef.current.handleTouchStart(e);
-    },[]);
+    }, []);
 
-    const handleTouchMove = useCallback((e)=>{
+    const handleTouchMove = useCallback((e) => {
         signaturePadRef.current && signaturePadRef.current.handleTouchMove(e);
-    },[]);
+    }, []);
 
-    const handleTouchEnd = useCallback((e)=>{
+    const handleTouchEnd = useCallback((e) => {
         signaturePadRef.current && signaturePadRef.current.handleTouchEnd(e);
-    },[]);
+    }, []);
 
-    const handleSaveCanvas = useCallback(() =>{
-        if(!canvasRef.current) {
+    const handleSaveCanvas = useCallback(() => {
+        if (!canvasRef.current) {
             return;
         }
         //@ts-ignore
@@ -35,40 +35,40 @@ const SignaturePad = React.forwardRef<any, IProps>(({className, style}, ref)=>{
         }).then(res => {
             Taro.saveImageToPhotosAlbum({
                 filePath: `${res.tempFilePath}`,
-                success(res) {
+                success() {
                     Taro.showToast({
                         title: '保存成功'
                     });
                 },
-                fail(err) {
+                fail() {
                     Taro.showToast({
                         title: '保存失败'
                     });
                 }
             })
-        }).catch(e => {
+        }).catch(() => {
 
         });
-    },[]);
+    }, []);
 
 
-    const handleClearCanvas = useCallback((e)=>{
+    const handleClearCanvas = useCallback(() => {
         signaturePadRef.current.clear();
     }, []);
 
-    const toDataURL = useCallback((type, encoderOptions)=>{
+    const toDataURL = useCallback((type, encoderOptions) => {
         return signaturePadRef.current.toDataURL(type, encoderOptions);
     }, []);
 
-    const isEmpty = useCallback(()=>{
+    const isEmpty = useCallback(() => {
         return signaturePadRef.current.isEmpty();
     }, []);
 
-    const fromDataURL = useCallback((dataUrl, options = {}, callback)=>{
+    const fromDataURL = useCallback((dataUrl, options = {}, callback) => {
         signaturePadRef.current.fromDataURL(dataUrl, options, callback);;
     }, []);
 
-    useImperativeHandle(ref, ()=>({
+    useImperativeHandle(ref, () => ({
         save: handleSaveCanvas,
         clear: handleClearCanvas,
         toDataURL: toDataURL,
@@ -76,10 +76,10 @@ const SignaturePad = React.forwardRef<any, IProps>(({className, style}, ref)=>{
         fromDataURL: fromDataURL,
     }));
 
-    useEffect(()=>{
-        Taro.nextTick(()=>{
+    useEffect(() => {
+        Taro.nextTick(() => {
             //需要设置为type=2d才会不报错
-            const query = Taro.createSelectorQuery().in(Taro.getCurrentInstance().page);
+            const query = Taro.createSelectorQuery().in(Taro.getCurrentInstance().page as any);
             query.select('.sp-canvas')
                 .fields({ node: true, size: true })
                 .exec((res) => {
@@ -99,7 +99,7 @@ const SignaturePad = React.forwardRef<any, IProps>(({className, style}, ref)=>{
 
     return (
         <Canvas
-            className={"sp-canvas "+className}
+            className={"sp-canvas " + className}
             style={style}
             id="sp-canvas"
             canvasId="sp-canvas"
