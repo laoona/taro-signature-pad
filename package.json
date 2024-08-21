@@ -1,6 +1,6 @@
 {
   "name": "@youlai/taro-signature-pad",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "taro3手写签名库",
   "main": "index.js",
   "types": "types/index.d.ts",
