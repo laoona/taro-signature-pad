@@ -1,20 +1,17 @@
 # taro-signature-pad
-[![npm version](http://img.shields.io/npm/v/@yz1311/taro-signature-pad.svg?style=flat-square)](https://npmjs.org/package/@yz1311/taro-signature-pad "View this project on npm")
-[![npm version](http://img.shields.io/npm/dm/@yz1311/taro-signature-pad.svg?style=flat-square)](https://npmjs.org/package/@yz1311/taro-signature-pad "View this project on npm")
-
 taro的手写签名库
 
 只支持taro3小程序，h5没有做兼容处理，只支持Canvas type="2d"
 
 ### 安装
 ```
-npm install @yz1311/taro-signature-pad --save
+npm install @youlai/taro-signature-pad --save
 ```
 
 
 ### 使用
 ```
-import {SignaturePad} from "@yz1311/taro-signature-pad";
+import {SignaturePad} from "@youlai/taro-signature-pad";
 
 ...
 //组件默认是100%高宽
